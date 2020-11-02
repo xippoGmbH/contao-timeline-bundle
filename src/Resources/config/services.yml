@@ -1,0 +1,14 @@
+services:
+    xippogmbh_contao_timeline_bundle.dca_helper:
+            class: XippoGmbH\ContaoTimelineBundle\Dca\Helper
+            public: true
+            arguments:
+                - '@security.token_storage'
+    xippogmbh_contao_timeline_bundle.content_element:
+        class: XippoGmbH\ContaoTimelineBundle\Controller\ContentElement\ContentTimelineController
+        arguments:
+            - '@contao.framework'
+        tags:
+            - { name: contao.content_element, category: xippo_elements, template: ce_timeline, type: timeline_id }
+            - { name: container.service_subscriber }
+        public: true

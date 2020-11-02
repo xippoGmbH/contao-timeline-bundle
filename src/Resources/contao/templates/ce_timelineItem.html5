@@ -1,0 +1,10 @@
+<?php foreach($this->slides as $slide): ?>
+	<div class="carousel-item">
+		<?php if($slide->backgroundImage != null) : ?>
+			<img class="d-block mx-auto" src="<?= $slide->backgroundImage->getOriginalPath() ?>" alt="<?= $slide->title; ?>">
+		<?php endif ?>
+		<div class="carousel-caption">
+			<?= implode('', $slide->content) ?>
+		</div>
+	</div>
+<?php endforeach; ?>

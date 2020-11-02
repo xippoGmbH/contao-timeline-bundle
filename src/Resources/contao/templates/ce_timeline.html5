@@ -1,0 +1,10 @@
+<!-- contao/templates/ce_timeline.html5 -->
+<section>
+	<?php if($this->slider->slideCount > 0): ?>
+	<div id="carouselExampleIndicators<?= $this->id ?> <?= $this->cssID ?>" class="carousel slide <?= $this->class ?>" data-ride="carousel">
+		<div class="carousel-inner" role="listbox">
+			<?php $this->insert('ce_timelineItem', $this->arrData); ?>
+		</div>
+	</div>
+	<?php endif; ?>
+</section>
