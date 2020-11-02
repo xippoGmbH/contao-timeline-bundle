@@ -54,8 +54,18 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline'] = [
             'eval' => ['tl_class' => 'w50', 'maxlength' => 255, 'mandatory' => true],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => '']
         ],
+        'onlyYear' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_xippo_timeline']['onlyYear'],
+            'inputType' => 'checkbox',
+			'exclude' => true,
+            'default' => true,
+            'eval' => [
+                'tl_class' => 'w50 m12',
+            ],
+            'sql' => "boolean NOT NULL"
+        ],
     ],
     'palettes' => [
-        'default' => '{slider_legend},title'
+        'default' => '{timeline_legend},title,onlyYear'
     ],
 ];
