@@ -1,10 +1,18 @@
-<?php foreach($this->slides as $slide): ?>
-	<div class="carousel-item">
-		<?php if($slide->backgroundImage != null) : ?>
-			<img class="d-block mx-auto" src="<?= $slide->backgroundImage->getOriginalPath() ?>" alt="<?= $slide->title; ?>">
-		<?php endif ?>
-		<div class="carousel-caption">
-			<?= implode('', $slide->content) ?>
-		</div>
-	</div>
+<?php foreach($this->timelineItems as $timelineItem): ?>
+	<article class="timeline-entry">
+		<div class="timeline-entry-inner">
+			<div class="timeline-icon bg-success"> <i class="entypo-feather"></i></div>
+			<div class="timeline-entry-text">
+				<time class="timeline-time" datetime="2018-05-23 00:00">
+					<h2><?= $timelineItem->date ?></h2>
+				</time>
+				<div class="timeline-label">
+					<?= $timelineItem->description ?>
+				</div>
+			<div>
+			<div class="timeline-entry-image">
+				<img src="<?= $timelineItem->image->getOriginalPath() ?>">
+			</div>
+		<div>
+	</article>
 <?php endforeach; ?>

@@ -14,5 +14,5 @@
 $GLOBALS['BE_MOD']['content']['timeline'] = ['tables' => ['tl_xippo_timeline','tl_xippo_timeline_item','tl_content'],
 ];
 // Models
-$GLOBALS['TL_MODELS']['tl_xippo_timeline'] = XippoGmbH\ContaoBootstrapSliderBundle\Model\TimelineModel::class;
-$GLOBALS['TL_MODELS']['tl_xippo_timeline_item'] = XippoGmbH\ContaoBootstrapSliderBundle\Model\TimelineItemModel::class;
+$GLOBALS['TL_MODELS']['tl_xippo_timeline'] = XippoGmbH\ContaoTimelineBundle\Model\TimelineModel::class;
+$GLOBALS['TL_MODELS']['tl_xippo_timeline_item'] = XippoGmbH\ContaoTimelineBundle\Model\TimelineItemModel::class;

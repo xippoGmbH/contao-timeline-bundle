@@ -40,7 +40,48 @@ class ContentTimelineController extends AbstractContentElementController
 	
     protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
     {
+		$timeline = TimelineModel::findBy('id', $model->timeline_id);
 		
+		if (!$timeline instanceof TimelineModel) {
+            return $template->getResponse();
+        }
+		
+		\System::log('Timeline gefunden, die ID ist: ' . $timeline->id, __METHOD__, TL_GENERAL);
+		
+		$options = [
+			'order' => 'sorting ASC'
+		];
+		$tempTimelineItems = TimelineItemModel::findBy('pid', $timeline->id, $options);
+		
+		$timeline->timelineItemCount = count($tempTimelineItems);
+		
+		$template->timeline = $timeline;
+        $timelineItems = [];
+		
+		if($tempTimelineItems->count() > 0) 
+		{
+			foreach($tempTimelineItems as $tempTimelineItem)
+			{
+				\System::log('Timeline Item ID: ' . $tempTimelineItem->id, __METHOD__, TL_GENERAL);
+				
+				if($tempTimelineItem->singleSRC != '')
+				{
+					$fileModel = FilesModel::findByUuid($tempTimelineItem->singleSRC);
+				
+					$file = new \File($fileModel->path);
+					$img = new Image($file);
+
+					$imgSize = $file->imageSize;
+					// TODO: implement image size
+
+					$tempTimelineItem->image = $img;
+				}
+				
+				$timelineItems[] = $tempTimelineItem;
+			}
+		}
+		
+		$template->timelineItems = $timelineItems;
 		
         return $template->getResponse();
     }

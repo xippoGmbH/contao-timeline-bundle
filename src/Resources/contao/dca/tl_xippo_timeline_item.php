@@ -25,10 +25,6 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
         ],
         'operations' => [
             'edit' => [
-                'href' => 'table=tl_content',
-                'icon' => 'edit.svg',
-            ],
-            'editheader' => [
                 'href' => 'act=edit',
                 'icon' => 'header.svg',
             ],
@@ -59,13 +55,13 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
 		'pid' => [
             'foreignKey' => 'tl_xippo_timeline.title',
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
-            'relation' => ['type'=>'belongsTo', 'load'=>'lazy']
+            'relation' => ['type'=>'belongsTo', 'load'=>'lazy'],
         ],
         'tstamp' => [
-            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0]
+            'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
 		'sorting' => [
-			'sql' => ['type' => 'integer', 'unsigned' => true, 'notnull' => true, 'default' => 0 ]
+			'sql' => ['type' => 'integer', 'unsigned' => true, 'notnull' => true, 'default' => 0 ],
 		],
         'title' => [
             'exclude' => true,
@@ -74,13 +70,14 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
                 'mandatory' => true,
                 'maxlength' => 255,
             ],
-            'sql' => "varchar(255) NOT NULL default ''",
+            'sql' => ['type' => 'string', 'length' => 255, 'notnull' => true, 'default' => ''],
         ],
 		'addImage' => [
+			'label' => &$GLOBALS['TL_LANG']['tl_content']['addImage'],
 			'exclude' => true,
 			'inputType' => 'checkbox',
-			'eval' => array('submitOnChange'=>true),
-			'sql' => "char(1) NOT NULL default ''"
+			'eval' => ['submitOnChange'=>true],
+			'sql' => ['type' => 'string', 'length' => 1, 'fixed' => true, 'notnull' => true, 'default' => ''],
 		],
 		'singleSRC' => [
             'exclude' => true,
@@ -92,9 +89,9 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
                 'extensions' => \Config::get('validImageTypes'),
                 'mandatory' => false,
             ],
-            'sql' => 'binary(16) NULL',
+            'sql' => [ 'type' => 'binary', 'length' => 16, 'notnull' => false ],
             'save_callback' => [
-                ['xippogmbh_contao_bootstrap_slider_bundle.dca_helper', 'storeFileMetaInformation'],
+                ['xippogmbh_contao_timeline_bundle.dca_helper', 'storeFileMetaInformation'],
             ],
         ],
 		'date' => [
@@ -104,39 +101,39 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
 			'sorting' => true,
 			'flag' => 8,
 			'inputType' => 'text',
-			'eval' => array('rgxp'=>'date', 'mandatory'=>true, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
-			'sql' => "int(10) unsigned NOT NULL default 0"
+			'eval' => [ 'rgxp'=>'date', 'mandatory'=>true, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard' ],
+			'sql' => [ 'type' => 'integer', 'unsigned' => true, 'notnull' => true, 'default' => '0'],
 		],
 		'alt' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['alt'],
 			'exclude' => true,
 			'search' => true,
 			'inputType' => 'text',
-			'eval' => array('maxlength'=>255, 'tl_class'=>'w50'),
-			'sql' => "varchar(255) NOT NULL default ''"
+			'eval' => ['maxlength'=>255, 'tl_class'=>'w50'],
+			'sql' => [ 'type' => 'string', 'length' => 255, 'notnull' => true, 'default' => ''],
 		],
 		'imageTitle' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['imageTitle'],
 			'exclude' => true,
 			'search' => true,
 			'inputType' => 'text',
-			'eval' => array('maxlength'=>255, 'tl_class'=>'w50'),
-			'sql' => "varchar(255) NOT NULL default ''"
+			'eval' => ['maxlength'=>255, 'tl_class'=>'w50'],
+			'sql' => [ 'type' => 'string', 'length' => 255, 'notnull' => true, 'default' => ''],
 		],
 		'caption' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['caption'],
 			'exclude' => true,
 			'search' => true,
 			'inputType' => 'text',
-			'eval' => array('maxlength'=>255, 'allowHtml'=>true, 'tl_class'=>'w50'),
-			'sql' => "varchar(255) NOT NULL default ''"
+			'eval' => ['maxlength'=>255, 'allowHtml'=>true, 'tl_class'=>'w50'],
+			'sql' => [ 'type' => 'string', 'length' => 255, 'notnull' => true, 'default' => ''],
 		],
 		'fullsize' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
 			'exclude' => true,
 			'inputType' => 'checkbox',
-			'eval' => array('tl_class'=>'w50 m12'),
-			'sql' => "char(1) NOT NULL default ''"
+			'eval' => ['tl_class'=>'w50 m12'],
+			'sql' => [ 'type' => 'string', 'length' => 1, 'fixed' => true, 'notnull' => true, 'default' => ''],
 		],
 		'size' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['size'],
@@ -148,7 +145,7 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
 			{
 				return System::getContainer()->get('contao.image.image_sizes')->getOptionsForUser(BackendUser::getInstance());
 			},
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql' => [ 'type' => 'string', 'length' => 64, 'notnull' => true, 'default' => ''],
 		],
 		'imagemargin' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
@@ -156,66 +153,64 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline_item'] = [
 			'inputType' => 'trbl',
 			'options' => $GLOBALS['TL_CSS_UNITS'],
 			'eval' => ['includeBlankOption'=>true, 'tl_class'=>'w50'],
-			'sql' => "varchar(128) NOT NULL default ''"
+			'sql' => [ 'type' => 'string', 'length' => 128, 'notnull' => true, 'default' => ''],
 		],
 		'imageUrl' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['imageUrl'],
 			'exclude' => true,
 			'search' => true,
 			'inputType' => 'text',
-			'eval' => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'dcaPicker'=>true, 'addWizardClass'=>false, 'tl_class'=>'w50'),
-			'sql' => "varchar(255) NOT NULL default ''"
+			'eval' => ['rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'dcaPicker'=>true, 'addWizardClass'=>false, 'tl_class'=>'w50'],
+			'sql' => [ 'type' => 'string', 'length' => 255, 'notnull' => true, 'default' => ''],
 		],
 		'floating' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['floating'],
 			'exclude' => true,
 			'inputType' => 'radioTable',
-			'options' => array('above', 'left', 'right', 'below'),
-			'eval' => array('cols'=>4, 'tl_class'=>'w50'),
+			'options' => ['above', 'left', 'right', 'below'],
+			'eval' => ['cols'=>4, 'tl_class'=>'w50'],
 			'reference' => &$GLOBALS['TL_LANG']['MSC'],
-			'sql' => "varchar(12) NOT NULL default 'above'"
+			'sql' => [ 'type' => 'string', 'length' => 12, 'notnull' => true, 'default' => 'above'],
 		],
         'description' => [
             'label' => &$GLOBALS['TL_LANG']['tl_xippo_timeline_item']['description'],
             'inputType' => 'textarea',
             'eval' => ['tl_class' => 'clr', 'rte' => 'tinyMCE', 'mandatory' => true],
-            'sql' => ['type' => 'text', 'notnull' => false]
+            'sql' => ['type' => 'text', 'notnull' => false],
         ],
 		'protected' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['protected'],
 			'exclude' => true,
 			'filter' => true,
 			'inputType' => 'checkbox',
-			'eval' => ['submitOnChange'=>true]
+			'eval' => ['submitOnChange'=>true],
+			'sql' => [ 'type' => 'string', 'length' => 1, 'fixed' => true, 'notnull' => true, 'default' => ''],
 		],
 		'groups' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['groups'],
 			'exclude' => true,
 			'inputType' => 'checkbox',
 			'foreignKey' => 'tl_member_group.name',
-			'eval' => ['mandatory'=>true, 'multiple'=>true]
+			'eval' => ['mandatory'=>true, 'multiple'=>true],
+			'sql' => [ 'type' => 'blob', 'notnull' => false],
 		],
 		'guests' => [
 			'label' => &$GLOBALS['TL_LANG']['tl_content']['guests'],
 			'exclude' => true,
 			'filter' => true,
-			'inputType' => 'checkbox'
+			'inputType' => 'checkbox',
+			'sql' => [ 'type' => 'string', 'length' => 1, 'fixed' => true, 'notnull' => true, 'default' => ''],
 		],
 		'cssClass' => [
 			'exclude' => true,
 			'inputType' => 'text',
-			'eval' => array('tl_class'=>'w50'),
-			'sql' => "varchar(255) NOT NULL default ''"
-		],
-		'space' => [
-			'label' => &$GLOBALS['TL_LANG']['tl_content']['space'],
-			'exclude' => true,
-			'inputType' => 'text',
-			'eval' => ['multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true]
+			'eval' => ['tl_class'=>'w50'],
+			'sql' => [ 'type' => 'string', 'length' => 255, 'notnull' => true, 'default' => ''],
 		],
     ],
     'palettes' => [
-        'default' => '{timeline_legend},title,description;{date_legend},date;{image_legend},addImage;{expert_legend:hide},cssClass;'
+        'default' => '{timeline_legend},title,description;{date_legend},date;{image_legend},addImage;{expert_legend:hide},cssClass;',
+		'__selector__' => [ 'addImage' ],
     ],
 	'subpalettes' => [
 		'addImage' => 'singleSRC,size,floating,imagemargin,fullsize,overwriteMeta',

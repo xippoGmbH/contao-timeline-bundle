@@ -62,7 +62,7 @@ $GLOBALS['TL_DCA']['tl_xippo_timeline'] = [
             'eval' => [
                 'tl_class' => 'w50 m12',
             ],
-            'sql' => "boolean NOT NULL"
+            'sql' => [ 'type' => 'boolean', 'notnull' => true ],
         ],
     ],
     'palettes' => [

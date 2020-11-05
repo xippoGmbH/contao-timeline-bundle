@@ -1,8 +1,6 @@
-# Contao 4 Boostrap Slider Bundle
+# Contao 4 Timeline Bundle
 
-This is a Slider for the Contao Content Managment Tool. It uses only
-bootstrap classes for definition. You can customizing the slider with 
-templates in the Contao Backend
+This is a Timeline for the Contao Content Managment Tool. 
 
 ## Install
 

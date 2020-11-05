@@ -5,7 +5,7 @@
  * (c) Aurelio Gisler (Xippo GmbH)
  *
  * @author     Aurelio Gisler
- * @package    ContaoBootstrapSlider
+ * @package    ContaoTimeline
  * @license    MIT
  * @see        https://github.com/xippoGmbH/contao-bootstrap-slider-bundle
  *
