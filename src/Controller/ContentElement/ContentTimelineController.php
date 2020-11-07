@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @ContentElement(category="texts")
+ * @ContentElement(category="xippo_elements")
  */
 class ContentTimelineController extends AbstractContentElementController
 {
